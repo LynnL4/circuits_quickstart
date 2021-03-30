@@ -4,17 +4,7 @@ defmodule CircuitsQuickstart.MixProject do
   @app :circuits_quickstart
   @version "0.4.3"
   @all_targets [
-    :rpi,
-    :rpi0,
-    :rpi2,
-    :rpi3,
-    :rpi3a,
-    :rpi4,
-    :bbb,
-    :osd32mp1,
-    :x86_64,
-    :giant_board,
-    :npi_imx6ull
+    :custom_bbb
   ]
 
   def project do
@@ -52,23 +42,14 @@ defmodule CircuitsQuickstart.MixProject do
       {:circuits_spi, "~> 0.1"},
       {:power_control, github: "cjfreeze/power_control"},
       {:ramoops_logger, "~> 0.1"},
+      {:nerves_key, "~> 0.5"},
 
       # Dependencies for all targets except :host
       {:nerves_runtime, "~> 0.11.3", targets: @all_targets},
       {:nerves_pack, "~> 0.4.0", targets: @all_targets},
 
       # Dependencies for specific targets
-      {:nerves_system_rpi, "~> 1.14", runtime: false, targets: :rpi},
-      {:nerves_system_rpi0, "~> 1.14", runtime: false, targets: :rpi0},
-      {:nerves_system_rpi2, "~> 1.14", runtime: false, targets: :rpi2},
-      {:nerves_system_rpi3, "~> 1.14", runtime: false, targets: :rpi3},
-      {:nerves_system_rpi3a, "~> 1.14", runtime: false, targets: :rpi3a},
-      {:nerves_system_rpi4, "~> 1.14", runtime: false, targets: :rpi4},
-      {:nerves_system_bbb, "~> 2.9", runtime: false, targets: :bbb},
-      {:nerves_system_osd32mp1, "~> 0.5", runtime: false, targets: :osd32mp1},
-      {:nerves_system_x86_64, "~> 1.14", runtime: false, targets: :x86_64},
-      {:nerves_system_giant_board, "~> 0.1", runtime: false, targets: :giant_board},
-      {:nerves_system_npi_imx6ull, "~> 0.2", runtime: false, targets: :npi_imx6ull}
+      {:nerves_system_bbb, path: "../nerves_system_bbb", runtime: false, targets: :custom_bbb, nerves: [compile: true]}
     ]
   end
 
